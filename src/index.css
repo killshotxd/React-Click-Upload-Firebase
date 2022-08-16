@@ -4,3 +4,24 @@
   margin: 0;
   padding: 0;
 }
+
+.center-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.image-card img {
+  width: 80%;
+  border-radius: 2rem;
+}
+
+.image-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
