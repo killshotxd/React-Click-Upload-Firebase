@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { storage } from "./Firebase";
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const App = () => {
   const [imageUpload, setImageUpload] = useState(null);
@@ -16,6 +18,7 @@ const App = () => {
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setImageList((prev) => [...prev, url]);
+        alert("Image uploaded");
       });
     });
   };
@@ -30,11 +33,21 @@ const App = () => {
     });
   }, []);
 
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
+
   return (
     <>
       <div className="container">
         <div className="center-div">
-          <div className="input-div">
+          <div
+            data-aos="fade-down"
+            data-aos-easing="linear"
+            data-aos-duration="1500"
+            className="input-div"
+          >
             <input
               className="input"
               type="file"
@@ -44,14 +57,19 @@ const App = () => {
             />
           </div>
 
-          <div className="btn-div">
+          <div
+            data-aos="fade-down"
+            data-aos-easing="linear"
+            data-aos-duration="1500"
+            className="btn-div"
+          >
             <button className="input" onClick={uploadImage}>
               Upload Image
             </button>
           </div>
         </div>
 
-        <div className="image-card">
+        <div data-aos="fade-up" data-aos-duration="3000" className="image-card">
           {imageList.map((url) => {
             return <img src={url} />;
           })}
